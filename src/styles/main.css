@@ -1,0 +1,47 @@
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #3b82f6;
+  --accent-color: #f59e0b;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --success-color: #22c55e;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.amplify-authenticator {
+  height: 100%;
+  width: 100%;
+  background-color: var(--background-color) !important;
+}
+
+.amplify-authenticator [data-amplify-authenticator-signin="true"] {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.amplify-button[data-variation='primary'] {
+  background-color: var(--primary-color) !important;
+}

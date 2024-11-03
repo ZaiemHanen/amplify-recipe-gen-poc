@@ -1,0 +1,52 @@
+.navbar {
+    height: 64px;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .userSection {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .username {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+  
+  .signOutButton {
+    padding: 0.5rem 1rem;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .signOutButton:hover {
+    background-color: var(--error-color);
+    border-color: var(--error-color);
+    color: white;
+  }
