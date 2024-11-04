@@ -7,14 +7,14 @@ interface Ingredient {
   unit: string;
 }
 
-interface Recipe {
-  title: string;
-  ingredients: string[];
-  instructions: string[];
-  servings: number;
-  prepTime: string;
-  cookTime: string;
-}
+// interface Recipe {
+//   title: string;
+//   ingredients: string[];
+//   instructions: string[];
+//   servings: number;
+//   prepTime: string;
+//   cookTime: string;
+// }
 
 const RecipeGenerator: React.FC = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([{ name: '', amount: '', unit: 'g' }]);
