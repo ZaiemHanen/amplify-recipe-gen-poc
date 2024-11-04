@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { ThemeProvider } from '@aws-amplify/ui-react';
 import Layout from './components/Layout/Layout';

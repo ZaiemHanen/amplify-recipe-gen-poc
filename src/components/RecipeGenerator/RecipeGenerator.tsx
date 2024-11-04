@@ -20,8 +20,8 @@ const RecipeGenerator: React.FC = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([{ name: '', amount: '', unit: 'g' }]);
   const [dietary, setDietary] = useState<string>('none');
   const [loading, setLoading] = useState<boolean>(false);
-  const [recipe, setRecipe] = useState<Recipe | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // const [recipe, setRecipe] = useState<Recipe | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   const addIngredient = () => {
     setIngredients([...ingredients, { name: '', amount: '', unit: 'g' }]);
@@ -40,8 +40,8 @@ const RecipeGenerator: React.FC = () => {
 
   const handleGenerate = async () => {
     setLoading(true);
-    setError(null);
-    setRecipe(null);
+    // setError(null);
+    // setRecipe(null);
 
     // Prepare the data to send to the API
     const requestData = {
@@ -65,10 +65,10 @@ const RecipeGenerator: React.FC = () => {
       console.log("response", response)
       const data = await response.json();
       console.log("data", data);
-      setRecipe(data);
+      // setRecipe(data);
     } catch (e) {
-      console.error('Error generating recipe:', e);
-      setError('Failed to generate recipe. Please try again.');
+      // console.error('Error generating recipe:', e);
+      // setError('Failed to generate recipe. Please try again.');
     } finally {
       setLoading(false);
     }
