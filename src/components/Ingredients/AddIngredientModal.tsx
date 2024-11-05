@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './AddIngredientModal.module.css';
-import { NewIngredient } from '../types';
+import { NewIngredient } from '../Ingredient';
 
 interface AddIngredientModalProps {
   onClose: () => void;

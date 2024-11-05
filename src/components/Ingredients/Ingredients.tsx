@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Ingredients.module.css';
 import AddIngredientModal from './AddIngredientModal';
-import { Ingredient, NewIngredient } from '../types';
+import { Ingredient, NewIngredient } from '../Ingredient.ts';
 
 interface IngredientsProps {
   userId?: string;
