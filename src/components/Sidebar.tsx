@@ -1,32 +1,34 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styles from './Layout/Sidebar.module.css';
 
-export interface SidebarProps {
+interface SidebarProps {
   activePage: string;
   setActivePage: (page: string) => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activePage, setActivePage }) => {
   const menuItems = [
-    { id: 'generate', icon: '🪄', label: 'Generate Recipe' },
-    { id: 'ingredients', icon: '🥗', label: 'My Ingredients' },
-    { id: 'saved', icon: '📚', label: 'Saved Recipes' },
-    { id: 'profile', icon: '👤', label: 'Profile' },
+    { id: 'generate', icon: '🪄', label: 'Generate Recipe', path: '/' },
+    { id: 'ingredients', icon: '🥗', label: 'My Ingredients', path: '/ingredients' },
+    { id: 'saved', icon: '📚', label: 'Saved Recipes', path: '/saved-recipes' },
+    { id: 'profile', icon: '👤', label: 'Profile', path: '/profile' },
   ];
 
   return (
     <div className={styles.sidebar}>
       {menuItems.map((item) => (
-        <button
+        <NavLink
           key={item.id}
-          className={`${styles.sidebarItem} ${
-            activePage === item.id ? styles.active : ''
-          }`}
+          to={item.path}
+          className={({ isActive }) => 
+            `${styles.sidebarItem} ${isActive ? styles.active : ''}`
+          }
           onClick={() => setActivePage(item.id)}
         >
           <span className={styles.icon}>{item.icon}</span>
           <span className={styles.label}>{item.label}</span>
-        </button>
+        </NavLink>
       ))}
     </div>
   );

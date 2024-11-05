@@ -1,0 +1,77 @@
+.savedRecipesContainer {
+    padding: 20px;
+  }
+  
+  .savedRecipesContainer h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .recipeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .recipeCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+
+  .recipeCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .recipeCard h3 {
+    font-size: 1.25rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .recipeCard p {
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .loadingContainer,
+  .errorContainer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.25rem;
+    color: #7f8c8d;
+  }
+  
+  .errorContainer {
+    color: #e74c3c;
+  }
+  
+  @media (min-width: 1200px) {
+    .recipeGrid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .viewButton {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .viewButton:hover {
+    background-color: #2980b9;
+  }

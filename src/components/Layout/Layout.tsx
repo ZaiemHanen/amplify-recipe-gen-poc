@@ -10,22 +10,6 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [activePage, setActivePage] = useState<string>('generate');
 
-  // Function to render the appropriate component based on activePage
-  const renderContent = () => {
-    switch (activePage) {
-      case 'generate':
-        return children;
-      case 'ingredients':
-        return <div>My Ingredients Page</div>;
-      case 'saved':
-        return <div>Saved Recipes Page</div>;
-      case 'profile':
-        return <div>Profile Page</div>;
-      default:
-        return children;
-    }
-  };
-
   return (
     <div className={styles.layout}>
       <Navbar />
@@ -35,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           setActivePage={setActivePage}
         />
         <main className={styles.main}>
-          {renderContent()}
+          {children}
         </main>
       </div>
     </div>

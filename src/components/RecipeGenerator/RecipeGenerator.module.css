@@ -124,3 +124,148 @@
       grid-template-columns: 1fr;
     }
   }
+
+
+
+
+  .previewSection {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  .previewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .saveButton {
+    background-color: #10B981;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .saveButton:hover {
+    background-color: #059669;
+  }
+  
+  .saveButton:disabled {
+    background-color: #9CA3AF;
+    cursor: not-allowed;
+  }
+  
+  .loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3B82F6;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: #6B7280;
+  }
+  
+  .emptyIcon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .recipeTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 1.5rem;
+  }
+  
+  .recipeMetadata {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .metadataItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4B5563;
+  }
+  
+  .metadataIcon {
+    font-size: 1.25rem;
+  }
+  
+  .section {
+    margin-bottom: 2rem;
+  }
+  
+  .section h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 1rem;
+  }
+  
+  .ingredientsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .ingredient {
+    color: #4B5563;
+    line-height: 1.5;
+  }
+  
+  .instructionsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .instruction {
+    color: #4B5563;
+    line-height: 1.6;
+  }
+  
+  .error {
+    color: #EF4444;
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .recipeMetadata {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }

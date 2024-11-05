@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
 import styles from './RecipeGenerator.module.css';
 
+
+interface RecipeGeneratorProps {
+  userId?: string;
+}
+
 interface Ingredient {
   name: string;
   amount: string;
   unit: string;
 }
 
-// interface Recipe {
-//   title: string;
-//   ingredients: string[];
-//   instructions: string[];
-//   servings: number;
-//   prepTime: string;
-//   cookTime: string;
-// }
+interface Recipe {
+  title: string;
+  ingredients: string[];
+  instructions: string[];
+  servings: number;
+  prepTime: string;
+  cookTime: string;
+}
 
-const RecipeGenerator: React.FC = () => {
+
+
+const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({ userId }) => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([{ name: '', amount: '', unit: 'g' }]);
   const [dietary, setDietary] = useState<string>('none');
   const [loading, setLoading] = useState<boolean>(false);
-  // const [recipe, setRecipe] = useState<Recipe | null>(null);
-  // const [error, setError] = useState<string | null>(null);
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [generatedRecipe, setGeneratedRecipe] = useState(null);
 
   const addIngredient = () => {
     setIngredients([...ingredients, { name: '', amount: '', unit: 'g' }]);
@@ -40,8 +48,8 @@ const RecipeGenerator: React.FC = () => {
 
   const handleGenerate = async () => {
     setLoading(true);
-    // setError(null);
-    // setRecipe(null);
+    setError(null);
+    setRecipe(null);
 
     // Prepare the data to send to the API
     const requestData = {
@@ -50,7 +58,7 @@ const RecipeGenerator: React.FC = () => {
     };
     console.log(requestData);
     try {
-      const response = await fetch('https://mc5u8otqm6.execute-api.eu-west-1.amazonaws.com/dev/generate-recipe', {
+      const response = await fetch('https://gev1wevaub.execute-api.us-west-2.amazonaws.com/dev/recipe/generate-recipe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,13 +72,32 @@ const RecipeGenerator: React.FC = () => {
       }
       console.log("response", response)
       const data = await response.json();
-      console.log("data", data);
-      // setRecipe(data);
+      console.log("data" + data);
+      setRecipe(data);
+      setGeneratedRecipe(data);
     } catch (e) {
-      // console.error('Error generating recipe:', e);
-      // setError('Failed to generate recipe. Please try again.');
+      console.error('Error generating recipe:', e);
+      setError('Failed to generate recipe. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSave = async () => {
+    if (generatedRecipe) {
+      try {
+        const response = await fetch('https://gev1wevaub.execute-api.us-west-2.amazonaws.com/dev/recipe/save-recipe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipe: generatedRecipe, userId: userId }),
+        });
+        const data = await response.json();
+        console.log("data :" + data);
+        alert('Recipe saved successfully!');
+      } catch (error) {
+        console.error('Error saving recipe:', error);
+        alert('Failed to save recipe. Please try again.');
+      }
     }
   };
 
@@ -144,30 +171,79 @@ const RecipeGenerator: React.FC = () => {
         </button>
       </div>
       <div className={styles.previewSection}>
-        <h2 className={styles.title}>Recipe Preview</h2>
-        {/* {loading && <p>Generating your recipe...</p>}
-        {error && <p className={styles.error}>{error}</p>}
-        {recipe && (
-          <div className={styles.recipePreview}>
-            <h3>{recipe.title}</h3>
-            <p>Servings: {recipe.servings}</p>
-            <p>Prep Time: {recipe.prepTime}</p>
-            <p>Cook Time: {recipe.cookTime}</p>
-            <h4>Ingredients:</h4>
-            <ul>
-              {recipe.ingredients.map((ingredient, index) => (
-                <li key={index}>{ingredient}</li>
-              ))}
-            </ul>
-            <h4>Instructions:</h4>
-            <ol>
-              {recipe.instructions.map((step, index) => (
-                <li key={index}>{step}</li>
-              ))}
-            </ol>
+        <div className={styles.previewHeader}>
+          <h2 className={styles.title}>Recipe Preview</h2>
+          {recipe && (
+            <button 
+              onClick={handleSave} 
+              className={styles.saveButton}
+              disabled={loading}
+            >
+              {loading ? 'Saving...' : 'Save Recipe'}
+            </button>
+          )}
+        </div>
+        
+        {loading && (
+          <div className={styles.loadingContainer}>
+            <div className={styles.spinner}></div>
+            <p>Generating your recipe...</p>
           </div>
-        )} */}
-        <p>Your generated recipe will appear here.</p>
+        )}
+        
+        {error && <p className={styles.error}>{error}</p>}
+        
+        {!recipe && !loading && !error && (
+          <div className={styles.emptyState}>
+            <span className={styles.emptyIcon}>📝</span>
+            <p>Your generated recipe will appear here.</p>
+          </div>
+        )}
+
+        {recipe && (
+          <div className={styles.recipeContent}>
+            <h3 className={styles.recipeTitle}>{recipe.title}</h3>
+            
+            <div className={styles.recipeMetadata}>
+              <div className={styles.metadataItem}>
+                <span className={styles.metadataIcon}>👥</span>
+                <span>Serves: {recipe.servings}</span>
+              </div>
+              <div className={styles.metadataItem}>
+                <span className={styles.metadataIcon}>⏲️</span>
+                <span>Prep: {recipe.prepTime}</span>
+              </div>
+              <div className={styles.metadataItem}>
+                <span className={styles.metadataIcon}>🍳</span>
+                <span>Cook: {recipe.cookTime}</span>
+              </div>
+            </div>
+
+            <div className={styles.recipeDetails}>
+              <div className={styles.section}>
+                <h4>Ingredients</h4>
+                <div className={styles.ingredientsList}>
+                  {recipe.ingredients.map((ingredient, index) => (
+                    <div key={index} className={styles.ingredient}>
+                      {ingredient}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.section}>
+                <h4>Instructions</h4>
+                <div className={styles.instructionsList}>
+                  {recipe.instructions.map((step, index) => (
+                    <div key={index} className={styles.instruction}>
+                      {step}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
