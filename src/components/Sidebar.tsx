@@ -7,7 +7,7 @@ interface SidebarProps {
   setActivePage: (page: string) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activePage, setActivePage }) => {
+const Sidebar: React.FC<SidebarProps> = ({ setActivePage }) => {
   const menuItems = [
     { id: 'generate', icon: '🪄', label: 'Generate Recipe', path: '/' },
     { id: 'ingredients', icon: '🥗', label: 'My Ingredients', path: '/ingredients' },

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { ThemeProvider } from '@aws-amplify/ui-react';
@@ -15,7 +15,7 @@ function App() {
   return (
     <ThemeProvider theme={amplifyTheme}>
       <Authenticator>
-        {({ signOut, user }) => (
+        {({ user }) => (
           <Router>
             <Layout>
               <Routes>
